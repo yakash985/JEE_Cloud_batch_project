@@ -31,6 +31,7 @@ Scanner input = new Scanner(System.in);
 			System.out.println();
 			System.out.println("1. Login");
 			System.out.println("2. SignUp");
+			System.out.println("3. For verifying whether the method of source to destination");
 			System.out.println("0. Exit Application");
 			System.out.println("Enter your choice: ");			
 			int choice = input.nextInt();//here also exception will come because if user enters input other than digit
@@ -112,6 +113,13 @@ Scanner input = new Scanner(System.in);
 				System.out.println();
 				System.out.println("===========================================================================");
 
+				break;
+			case 3:
+				System.out.println("Enter your Source");
+				String source = input.next();
+				System.out.println("Enter your destination");
+				String destination = input.next();
+				service.searchBus(source, destination);		
 				break;
 			case 0:
 				flag =false;
