@@ -7,7 +7,7 @@ public interface BookingService {
 	Passenger login(String userName);
 	boolean passwordVerification(Passenger pssgn,String password);
 	String[] searchBus(String source,String destination);
-	void seatAvailability(String busName);
+	int seatAvailability(String busName);
 	boolean verfiySelectedSeatAvailable(String busName,int seatNumber);
-	boolean bookTicket(String busName[][],int seatNumber);
+	void bookTicket(String busName,int seatNumber,String pssgnName);
 }

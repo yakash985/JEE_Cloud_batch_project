@@ -31,10 +31,14 @@ Scanner input = new Scanner(System.in);
 			System.out.println();
 			System.out.println("1. Login");
 			System.out.println("2. SignUp");
-			System.out.println("3. For verifying whether the method of source to destination");
+//			System.out.println("3. For verifying whether the method of source to destination");
 			System.out.println("0. Exit Application");
 			System.out.println("Enter your choice: ");			
 			int choice = input.nextInt();//here also exception will come because if user enters input other than digit
+			while(choice!=1 && choice!=2 && choice!=0) {
+				System.out.println("Inavlid input!!!----enter either\'1\' or\'2\' or\'0\'");
+				choice = input.nextInt();
+			}
 			System.out.println();
 			
 			switch(choice) {
@@ -74,7 +78,88 @@ Scanner input = new Scanner(System.in);
 						break;
 					}
 				}	
-				
+//
+				System.out.println("===========================================================================");
+				//boolean sourceToDestination=true;
+				//label1:
+				String goback;
+				String busName;
+				int busChoice;
+				int seatChoice;
+				label1:
+				while(true){
+					//####
+					System.out.println("Enter your Source");
+					String source = input.next();
+					System.out.println("Enter your destination");
+					String destination = input.next();
+					String route[] = service.searchBus(source, destination);
+					//####@@@@
+					System.out.println("Select the bus from above list in which you want to travel");
+					busChoice = input.nextInt();
+					while(busChoice>route.length) {
+						System.out.println("Invalid input!!!!");
+						System.out.println("Select the bus agian from above list in which you want to travel");
+						busChoice = input.nextInt();
+					}
+					System.out.println();
+					busName = route[busChoice-1];
+//					/--->
+					label2:
+						while(true) {
+							int numberOfSeats =service.seatAvailability(route[busChoice-1]);
+							//####@@@@
+							System.out.println("Enter the seat number you want from the above available seats");
+							seatChoice = input.nextInt();
+							while(seatChoice<1 || seatChoice>numberOfSeats) {
+								System.out.println(seatChoice+" is not present in bus!!! ");
+								System.out.println("Enter the seat number again which you want from the above available seats");
+								seatChoice = input.nextInt();
+							}
+			//				booleanservice.verfiySelectedSeatAvailable(bus, seatChoice);
+							while((service.verfiySelectedSeatAvailable(route[busChoice-1], seatChoice))==false) {
+								System.out.println("Please enter the seat number again you want from the above available seats");
+								seatChoice = input.nextInt();
+							}
+							System.out.println();
+							//####
+							System.out.println("To confirm the seat for booking press");
+							System.out.println("1---->to confirm and book the seat");
+							System.out.println("2---->to go to main menu");
+							int conf = input.nextInt();
+							while(conf!=1 && conf!=2) {
+								System.out.println("Inavlid input!!!----enter either\'1\' or\' 2\'");
+								conf = input.nextInt();
+							}
+							if(conf==1) {
+								System.out.println(""
+										+ "");
+								System.out.println("Enter the passenger name ");
+								input.nextLine();
+								String pssgnName = input.nextLine();
+								service.bookTicket(busName, seatChoice, pssgnName);
+								System.out.println();
+								System.out.println("Press following:");
+								System.out.println("1.  to book again");
+								System.out.println("2.  to go to main menu and book again in another bus");
+								System.out.println("3.  to sign out ");
+								int opt = input.nextInt();
+								while(opt!=1 && opt!=2 && opt!=3) {
+									System.out.println("Inavlid input!!!----enter either\'1\' or \'2\' or \'3\'");
+									opt = input.nextInt();
+								}
+								if(opt==1) {
+									continue label2;
+								}else if(opt==2) {
+									continue label1;
+								}else{
+									break label1;
+								}
+							}else{
+								continue label1;						
+							}
+						}
+						}				
 				break;
 			case 2:
 				System.out.println("===========================================================================");
@@ -100,7 +185,7 @@ Scanner input = new Scanner(System.in);
 				System.out.println(pssgnr1.toString());
 				System.out.println();
 				System.out.println("Enter \"back\" to go to login page ");
-				String goback = input.next();
+				goback = input.next();
 				while(!goback.equals("back")){
 					System.out.println("Inavlid input!!!");
 					System.out.println("###Enter \"back\" to go to login page ");
@@ -114,30 +199,43 @@ Scanner input = new Scanner(System.in);
 				System.out.println("===========================================================================");
 
 				break;
-			case 3:
-				label:
-				System.out.println("Enter your Source");
-				String source = input.next();
-				System.out.println("Enter your destination");
-				String destination = input.next();
-				String route[] = service.searchBus(source, destination);
-				
-				System.out.println("Select the bus in which you want to travel");
-				int busChoice = input.nextInt();
-				System.out.println();
-				service.seatAvailability(route[busChoice-1]);
-				
-				System.out.println("Enter the seat number you want from the above available seats");
-				int seatChoice = input.nextInt();
-//				booleanservice.verfiySelectedSeatAvailable(bus, seatChoice);
-				while((service.verfiySelectedSeatAvailable(route[busChoice-1], seatChoice))==false) {
-					System.out.println("Please enter the seat number again you want from the above available seats");
-					seatChoice = input.nextInt();
-				}
-				System.out.println();
-				
-				
-				break;
+//			case 3:
+//				System.out.println("===========================================================================");
+//				//boolean sourceToDestination=true;
+//				//label1:
+//				while(true){
+//				//####
+//				System.out.println("Enter your Source");
+//				String source = input.next();
+//				System.out.println("Enter your destination");
+//				String destination = input.next();
+//				String route[] = service.searchBus(source, destination);
+//				//####@@@@
+//				System.out.println("Select the bus in which you want to travel");
+//				int busChoice = input.nextInt();
+//				System.out.println();
+//				service.seatAvailability(route[busChoice-1]);
+//				//####@@@@
+//				System.out.println("Enter the seat number you want from the above available seats");
+//				int seatChoice = input.nextInt();
+////				booleanservice.verfiySelectedSeatAvailable(bus, seatChoice);
+//				while((service.verfiySelectedSeatAvailable(route[busChoice-1], seatChoice))==false) {
+//					System.out.println("Please enter the seat number again you want from the above available seats");
+//					seatChoice = input.nextInt();
+//				}
+//				System.out.println();
+//				//####
+//				System.out.println("To confirm the seat for booking press");
+//				System.out.println("1---->to confirm and book the seat");
+//				System.out.println("2---->to go to main menu");
+//				int conf = input.nextInt();
+//				if(conf==1) {
+//					System.out.println("Go for booking");
+//					break;
+//					//sourceToDestination=false;
+//				}
+//			}
+//					break;
 			case 0:
 				flag =false;
 			

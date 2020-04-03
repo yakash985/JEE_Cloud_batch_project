@@ -24,14 +24,14 @@ public class BookingServiceImpl implements BookingService {
 		busList.put("Bus2", bus2);
 		busList.put("Bus3", bus3);
 		busList.put("Bus4", bus4);
-		bus1[0][1]="conductor1";//third seat not available
-		bus1[1][1]="conductor2";
-		bus2[0][1]="conductor3";//third seat not available
-		bus2[1][1]="conductor4";
-		bus3[0][1]="conductor5";//third seat not available
-		bus3[1][1]="conductor6";
-		bus4[0][1]="conductor7";//third seat not available
-		bus4[1][1]="conductor8";
+		bus1[0][1] = "conductor1";// third seat not available
+		bus1[1][1] = "conductor2";
+		bus2[0][1] = "conductor3";// third seat not available
+		bus2[1][1] = "conductor4";
+		bus3[0][1] = "conductor5";// third seat not available
+		bus3[1][1] = "conductor6";
+		bus4[0][1] = "conductor7";// third seat not available
+		bus4[1][1] = "conductor8";
 
 	}
 
@@ -139,7 +139,8 @@ public class BookingServiceImpl implements BookingService {
 	}
 
 	@Override
-	public void seatAvailability(String busName) {
+	public int seatAvailability(String busName) {
+		//return type is int--->because it returns number of seats in that bus 
 		System.out.println("Seats available in " + busName);
 		String bus[][] = busList.get(busName);
 		if (returnJourneyFlag == false) {
@@ -152,6 +153,7 @@ public class BookingServiceImpl implements BookingService {
 				}
 			}
 			System.out.println();
+			return bus[0].length;
 		} else {
 			for (int i = 0; i < bus[1].length; i++) {
 				if (bus[1][i] == null) {
@@ -162,40 +164,58 @@ public class BookingServiceImpl implements BookingService {
 				}
 			}
 			System.out.println();
-
+			return bus[1].length;
 		}
 	}
 
 	@Override
 	public boolean verfiySelectedSeatAvailable(String busName, int seatNumber) {
 		String bus[][] = busList.get(busName);
-		if(returnJourneyFlag==false) {
-			if(bus[0][seatNumber-1]==null) {
-				System.out.println("You have selected seat number"+seatNumber+" of "+busName);
+		if (returnJourneyFlag == false) {
+			if (bus[0][seatNumber - 1] == null) {
+				System.out.println("You have selected seat number " + seatNumber + " of " + busName);
 				return true;
-			}else {
+			} else {
 				System.out.println("This seat is not available sir!!!!");
 				return false;
 			}
-		}else {
-			if(bus[1][seatNumber-1]==null) {
-				System.out.println("You have selected seat number"+seatNumber+" of "+busName);
+		} else {
+			if (bus[1][seatNumber - 1] == null) {
+				System.out.println("You have selected seat number " + seatNumber + " of " + busName);
 				return true;
-			}else {
+			} else {
 				System.out.println("This seat is not available sir!!!!");
 				return false;
-			}			
+			}
 		}
-		
+
 	}
 
 	@Override
-	public boolean bookTicket(String[][] busName, int seatNumber) {
+	public void bookTicket(String busName, int seatNumber, String pssgnName) {
 		// TODO Auto-generated method stub
-		return false;
-	}
+		String bus[][] = busList.get(busName);
+		if (returnJourneyFlag == false) {
+			bus[0][seatNumber-1] = pssgnName;
+			busList.replace(busName, bus);
+			System.out.println();
+			System.out.println("You have successfully booked the ticket!!!");
+			System.out.println("Your Ticket details are:");
+			System.out.println("Passsenger Name :"+pssgnName);
+			System.out.println("Bus Name :"+busName);
+			System.out.println("Seat Number"+seatNumber);
+		}else {
+			bus[0][seatNumber-1] = pssgnName;
+			busList.replace(busName, bus);
+			System.out.println();
+			System.out.println("You have successfully booked the ticket!!!");
+			System.out.println("Your Ticket details are:");
+			System.out.println("Passsenger Name :"+pssgnName);
+			System.out.println("Bus Name :"+busName);
+			System.out.println("Seat Number"+seatNumber);
+		}
 
-	
-	
+		returnJourneyFlag = false;
+	}
 
 }
