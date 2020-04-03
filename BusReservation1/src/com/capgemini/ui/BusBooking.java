@@ -115,11 +115,28 @@ Scanner input = new Scanner(System.in);
 
 				break;
 			case 3:
+				label:
 				System.out.println("Enter your Source");
 				String source = input.next();
 				System.out.println("Enter your destination");
 				String destination = input.next();
-				service.searchBus(source, destination);		
+				String route[] = service.searchBus(source, destination);
+				
+				System.out.println("Select the bus in which you want to travel");
+				int busChoice = input.nextInt();
+				System.out.println();
+				service.seatAvailability(route[busChoice-1]);
+				
+				System.out.println("Enter the seat number you want from the above available seats");
+				int seatChoice = input.nextInt();
+//				booleanservice.verfiySelectedSeatAvailable(bus, seatChoice);
+				while((service.verfiySelectedSeatAvailable(route[busChoice-1], seatChoice))==false) {
+					System.out.println("Please enter the seat number again you want from the above available seats");
+					seatChoice = input.nextInt();
+				}
+				System.out.println();
+				
+				
 				break;
 			case 0:
 				flag =false;
