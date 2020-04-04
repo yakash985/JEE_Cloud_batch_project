@@ -40,6 +40,9 @@ public class BookingServiceImpl implements BookingService {
 	private static String route3[] = { "Bus3" };// from Mumbai to Panvel to Lonavala to Pune
 
 	private static boolean returnJourneyFlag = false;// we will use this in selection of bus
+	public void setReturnJourneyFlag(boolean returnJourneyFlag) {
+		BookingServiceImpl.returnJourneyFlag = returnJourneyFlag;
+	}
 
 	@Override
 	public boolean signUp(Passenger pssgn) {
@@ -83,7 +86,6 @@ public class BookingServiceImpl implements BookingService {
 		String lonavala = "Lonavala";
 		String pune = "Pune";
 		boolean f;
-		Scanner input1 = new Scanner(System.in);
 		if ((f = (mumbai.equals(source) && panvel.equals(destination)))
 				|| (mumbai.equals(destination) && panvel.equals(source))) {
 			if (f) {
@@ -141,9 +143,10 @@ public class BookingServiceImpl implements BookingService {
 	@Override
 	public int seatAvailability(String busName) {
 		//return type is int--->because it returns number of seats in that bus 
-		System.out.println("Seats available in " + busName);
+		
 		String bus[][] = busList.get(busName);
 		if (returnJourneyFlag == false) {
+			System.out.println("Seats available in " + busName);
 			for (int i = 0; i < bus[0].length; i++) {
 				if (bus[0][i] == null) {
 					System.out.printf("%d  ", i + 1);
@@ -155,6 +158,7 @@ public class BookingServiceImpl implements BookingService {
 			System.out.println();
 			return bus[0].length;
 		} else {
+			System.out.println("Seats available in " + busName+"R");
 			for (int i = 0; i < bus[1].length; i++) {
 				if (bus[1][i] == null) {
 					System.out.printf("%d  ", i + 1);
@@ -181,7 +185,7 @@ public class BookingServiceImpl implements BookingService {
 			}
 		} else {
 			if (bus[1][seatNumber - 1] == null) {
-				System.out.println("You have selected seat number " + seatNumber + " of " + busName);
+				System.out.println("You have selected seat number " + seatNumber + " of " + busName+"R");
 				return true;
 			} else {
 				System.out.println("This seat is not available sir!!!!");
@@ -205,17 +209,15 @@ public class BookingServiceImpl implements BookingService {
 			System.out.println("Bus Name :"+busName);
 			System.out.println("Seat Number"+seatNumber);
 		}else {
-			bus[0][seatNumber-1] = pssgnName;
+			bus[1][seatNumber-1] = pssgnName;
 			busList.replace(busName, bus);
 			System.out.println();
 			System.out.println("You have successfully booked the ticket!!!");
 			System.out.println("Your Ticket details are:");
 			System.out.println("Passsenger Name :"+pssgnName);
-			System.out.println("Bus Name :"+busName);
-			System.out.println("Seat Number"+seatNumber);
+			System.out.println("Bus Name :"+busName+"R");
+			System.out.println("Seat Number :"+seatNumber);
 		}
-
-		returnJourneyFlag = false;
 	}
 
 }

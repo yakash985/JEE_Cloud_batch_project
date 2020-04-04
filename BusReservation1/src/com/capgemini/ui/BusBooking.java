@@ -151,8 +151,12 @@ Scanner input = new Scanner(System.in);
 								if(opt==1) {
 									continue label2;
 								}else if(opt==2) {
+									
+								//set the return flag in bookserviceimpl to false since we are again searching for bus
+									service.setReturnJourneyFlag(false);
 									continue label1;
 								}else{
+									service.setReturnJourneyFlag(false);
 									break label1;
 								}
 							}else{

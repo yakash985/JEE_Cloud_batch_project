@@ -3,6 +3,7 @@
 import com.capgemini.model.Passenger;
 
 public interface BookingService {
+	void setReturnJourneyFlag(boolean returnJourneyFlag);
 	boolean signUp(Passenger pssgn);
 	Passenger login(String userName);
 	boolean passwordVerification(Passenger pssgn,String password);
