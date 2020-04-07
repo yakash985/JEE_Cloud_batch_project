@@ -12,7 +12,7 @@ public interface BookingService {
 	boolean verfiySelectedSeatAvailable(String busName,int seatNumber);
 	void bookTicket(String busName,int seatNumber,String pssgnName);
 //just for debuging 
-	void listBusDisplay();
+	void listBusDisplay(String busName);
 	void listPassgnDisplay();
 
 

@@ -17,6 +17,11 @@ public class BusDaoImpl implements BusDao{
 														// and while returning we will use 2nd row
 	private static String bus3[][] = new String[2][20];
 	private static String bus4[][] = new String[2][20];
+	
+	private static String route1[] = { "Bus1", "Bus2", "Bus3" };// from Mumbai to Panvel
+	private static String route2[] = { "Bus2", "Bus3" };// from Mumbai to Panvel to Lonavala
+	private static String route3[] = { "Bus3" };// from Mumbai to Panvel to Lonavala to Pune
+
 	static {
 		Passenger pssgn1 = new Passenger("Atharva", "AtharvaP1997", 21,'M', "22222222");
 		Passenger pssgn2 = new Passenger("Arun", "Arun1997", 22,'M', "88888888");
@@ -52,5 +57,24 @@ public class BusDaoImpl implements BusDao{
 	public Map<String, String[][]> retrieveBusList() {
 		return busList;
 	}
+	public static String[] getRoute1() {
+		return route1;
+	}
+	public static void setRoute1(String[] route1) {
+		BusDaoImpl.route1 = route1;
+	}
+	public static String[] getRoute2() {
+		return route2;
+	}
+	public static void setRoute2(String[] route2) {
+		BusDaoImpl.route2 = route2;
+	}
+	public static String[] getRoute3() {
+		return route3;
+	}
+	public static void setRoute3(String[] route3) {
+		BusDaoImpl.route3 = route3;
+	}
+	
 	
 }

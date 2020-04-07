@@ -1,6 +1,5 @@
 package com.capgemini.service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -18,9 +17,9 @@ public class BookingServiceImpl1 implements BookingService {
 	
 	////
 
-	private static String route1[] = { "Bus1", "Bus2", "Bus3" };// from Mumbai to Panvel
-	private static String route2[] = { "Bus2", "Bus3" };// from Mumbai to Panvel to Lonavala
-	private static String route3[] = { "Bus3" };// from Mumbai to Panvel to Lonavala to Pune
+//	private static String route1[] = { "Bus1", "Bus2", "Bus3" };// from Mumbai to Panvel
+//	private static String route2[] = { "Bus2", "Bus3" };// from Mumbai to Panvel to Lonavala
+//	private static String route3[] = { "Bus3" };// from Mumbai to Panvel to Lonavala to Pune
 
 	private static boolean returnJourneyFlag = false;// we will use this in selection of bus
 	public void setReturnJourneyFlag(boolean returnJourneyFlag) {
@@ -75,6 +74,7 @@ public class BookingServiceImpl1 implements BookingService {
 		boolean f;
 		if ((f = (mumbai.equals(source) && panvel.equals(destination)))
 				|| (mumbai.equals(destination) && panvel.equals(source))) {
+			String route1[] = BusDaoImpl.getRoute1();
 			if (f) {
 				for (int i = 0; i < route1.length; i++) {
 					System.out.println((i + 1) + ". " + route1[i]);
@@ -91,6 +91,7 @@ public class BookingServiceImpl1 implements BookingService {
 
 		} else if ((f = (((mumbai.equals(source) || panvel.equals(source))) && lonavala.equals(destination)))
 				|| ((mumbai.equals(destination) || panvel.equals(destination)) && lonavala.equals(source))) {
+			String route2[] = BusDaoImpl.getRoute2();
 			if (f) {
 				for (int i = 0; i < route2.length; i++) {
 					System.out.println((i + 1) + ". " + route2[i]);
@@ -109,6 +110,7 @@ public class BookingServiceImpl1 implements BookingService {
 				&& pune.equals(destination)))
 				|| ((mumbai.equals(destination) || panvel.equals(destination) || lonavala.equals(destination))
 						&& pune.equals(source))) {
+			String route3[] = BusDaoImpl.getRoute3();
 			if (f) {
 				for (int i = 0; i < route3.length; i++) {
 					System.out.println((i + 1) + ". " + route3[i]);
@@ -211,9 +213,8 @@ public class BookingServiceImpl1 implements BookingService {
 	}
 
 	@Override
-	public void listBusDisplay() {
-		busList1 = busDao.retrieveBusList(); 
-		String busName ="Bus1";
+	public void listBusDisplay(String busName) {
+		busList1 = busDao.retrieveBusList();
 		String bus[][] = busList1.get(busName);
 		for (int i = 0; i < bus.length; i++) {
 			System.out.println("Bus journey code"+i);

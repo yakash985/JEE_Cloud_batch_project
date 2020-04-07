@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 import com.capgemini.model.Passenger;
 import com.capgemini.service.BookingService;
-import com.capgemini.service.BookingServiceImpl;
 import com.capgemini.service.BookingServiceImpl1;
 
 public class BusBooking {
@@ -22,7 +21,7 @@ public class BusBooking {
 			System.out.println();
 			System.out.println("1. Login");
 			System.out.println("2. SignUp");
-			System.out.println("3. Admin work");
+			System.out.println("3. Admin work for debuging");
 			System.out.println("0. Exit Application");
 			System.out.println("Enter your choice: ");			
 			int choice = input.nextInt();//here also exception will come because if user enters input other than digit
@@ -68,11 +67,9 @@ public class BusBooking {
 						//flag=true;//used for debuging
 						break;
 					}
-				}	
-//
+				}
+				
 				System.out.println("===========================================================================");
-				//boolean sourceToDestination=true;
-				//label1:
 				String goback;
 				String busName;
 				int busChoice;
@@ -95,7 +92,7 @@ public class BusBooking {
 					}
 					System.out.println();
 					busName = route[busChoice-1];
-//					/--->
+
 					label2:
 						while(true) {
 							int numberOfSeats =service.seatAvailability(route[busChoice-1]);
@@ -107,7 +104,7 @@ public class BusBooking {
 								System.out.println("Enter the seat number again which you want from the above available seats");
 								seatChoice = input.nextInt();
 							}
-			//				booleanservice.verfiySelectedSeatAvailable(bus, seatChoice);
+			
 							while((service.verfiySelectedSeatAvailable(route[busChoice-1], seatChoice))==false) {
 								System.out.println("Please enter the seat number again you want from the above available seats");
 								seatChoice = input.nextInt();
@@ -194,89 +191,20 @@ public class BusBooking {
 				System.out.println("===========================================================================");
 
 				break;
-//			case 3:
-//				System.out.println("===========================================================================");
-//				//boolean sourceToDestination=true;
-//				//label1:
-//				while(true){
-//				//####
-//				System.out.println("Enter your Source");
-//				String source = input.next();
-//				System.out.println("Enter your destination");
-//				String destination = input.next();
-//				String route[] = service.searchBus(source, destination);
-//				//####@@@@
-//				System.out.println("Select the bus in which you want to travel");
-//				int busChoice = input.nextInt();
-//				System.out.println();
-//				service.seatAvailability(route[busChoice-1]);
-//				//####@@@@
-//				System.out.println("Enter the seat number you want from the above available seats");
-//				int seatChoice = input.nextInt();
-////				booleanservice.verfiySelectedSeatAvailable(bus, seatChoice);
-//				while((service.verfiySelectedSeatAvailable(route[busChoice-1], seatChoice))==false) {
-//					System.out.println("Please enter the seat number again you want from the above available seats");
-//					seatChoice = input.nextInt();
-//				}
-//			System.out.println();
-//				//####
-//				System.out.println("To confirm the seat for booking press");
-//				System.out.println("1---->to confirm and book the seat");
-//				System.out.println("2---->to go to main menu");
-//				int conf = input.nextInt();
-//				if(conf==1) {
-//					System.out.println("Go for booking");
-//					break;
-//					//sourceToDestination=false;
-//				}
-//			}
-//					break;
 			case 3:
-				service.listBusDisplay();
+				System.out.println("To see passengers in bus enter the bus name ");
+				String busName1 = input.next();
+				service.listBusDisplay(busName1);
 				service.listPassgnDisplay();
-			
+				break;
 			case 0:
-//				service1.listDisplay();
 				flag =false;
 			
 			}		
 			
 		} while (flag);	
-
-	
-	
-	
-	
-	
-//	//login page
-//		process:while(true) {
-//	 
-//		System.out.println("Enter your login Username:");
-//		String userName = input.next();
-//		Passenger pssgn = service.login(userName);
-//		if(pssgn==null) {
-//			System.out.println("!!!!!!!!!!invalid user name");
-//			System.out.println("========================================================");
-//			System.out.println();
-//			continue process;
-//		}
-//		System.out.println("Enter the password: ");
-//		String password = input.next();
-//		boolean result = service.passwordVerification(pssgn, password);
-//		
-//		}
 		
-		
-////		System.out.println(pssgn.getAge());
-////		pssgn =null;
-//		try {
-//			System.out.println(pssgn.toString());
-//		} catch (NullPointerException e) {
-//			System.out.println("invalid user name");
-//		}
-//		
-//		System.out.println(userName);
-	
+		input.close();
 	}
 
 }
